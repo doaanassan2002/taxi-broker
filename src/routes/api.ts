@@ -9,7 +9,7 @@ let channel: amqp.Channel;
 // تهيئة الـ Exchange عند البداية
 setupExchange().then((result) => {
   channel = result.channel;
-  console.log('🚀 RabbitMQ جاهز!');
+  console.log('🚀 RabbitMQ is ready!');
 });
 
 // السائق يبعث موقعه

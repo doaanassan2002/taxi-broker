@@ -17,7 +17,7 @@ export async function setupExchange() {
   await channel.assertQueue(DLQ_NAME, { durable: false });
   await channel.bindQueue(DLQ_NAME, DLX_NAME, 'failed');
 
-  console.log('✅ البروكر و الـ DLQ جاهزان!');
+  console.log('✅ Broker and DLQ are ready!');
   return { connection, channel };
 }
 

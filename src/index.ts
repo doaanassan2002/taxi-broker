@@ -8,6 +8,6 @@ app.use(express.json());
 app.use('/api', router);
 
 app.listen(PORT, () => {
-  console.log(`🚀 السيرفر شغال على http://localhost:${PORT}`);
-  console.log(`📡 جاهز لاستقبال الطلبات...`);
+  console.log(`🚀 Server is running on http://localhost:${PORT}`);
+console.log(`📡 Ready to receive requests...`);
 });

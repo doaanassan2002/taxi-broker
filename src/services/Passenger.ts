@@ -13,19 +13,7 @@ export async function subscribePassenger(passengerId: string) {
 
   await channel.bindQueue(`passenger_${passengerId}`, 'taxi_locations', '');
 
-  // channel.consume(`passenger_${passengerId}`, (msg) => {
-  //   if (msg) {
-  //     try {
-  //       const data = JSON.parse(msg.content.toString());
-  //       // هنا يمكنك إضافة منطق المعالجة
-  //       console.log(`📍 راكب ${passengerId} استلم موقع: ${data.driverId}`);
-  //       channel.ack(msg); // تأكيد النجاح
-  //     } catch (err) {
-  //       console.error("فشل المعالجة، الرسالة ستذهب للـ DLQ");
-  //       channel.nack(msg, false, false); // الـ nack ينقل الرسالة فوراً للـ DLQ
-  //     }
-  //   }
-  // });
+ 
   channel.consume(`passenger_${passengerId}`, (msg) => {
   if (msg) {
     const data = JSON.parse(msg.content.toString());
@@ -35,7 +23,7 @@ export async function subscribePassenger(passengerId: string) {
       console.log("🔥 عطل متعمد في معالجة السائق CRASH");
       channel.nack(msg, false, false); // هذا سيؤدي لنقل الرسالة إلى الـ DLQ
     } else {
-      console.log(`📍 تم المعالجة بنجاح: ${data.driverId}`);
+      console.log(`📍 success processing : ${data.driverId}`);
       channel.ack(msg);
     }
   }
